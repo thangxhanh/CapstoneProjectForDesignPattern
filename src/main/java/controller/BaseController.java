@@ -11,7 +11,7 @@ import entity.media.Media;
  * @author nguyenlm
  */
 public class BaseController {
-    
+    //Common coupling: sử dụng chung biến như cartInstance
     /**
      * The method checks whether the Media in Cart, if it were in, we will return the CartMedia else return null
      * @param media

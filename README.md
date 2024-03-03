@@ -44,3 +44,8 @@ Click on `Run` -> `Run Configurations...`  -> `Java Application`, create a new l
 - manhvd   - Software Engeneering Student - k61
 - hieudm   - ICT - k61
 - thanhld  - ICT - k62
+
+## Lù Mạnh Thắng
+# Week2 Coupling
+- Có common coupling trong các controller các class có sử dụng chung các biến static trong class như "SessionInformation"
+- Có stamp coupling trong class DeliveryInfo.java, Cart.java.

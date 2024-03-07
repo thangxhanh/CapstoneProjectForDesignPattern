@@ -69,6 +69,7 @@ public class PaymentController extends BaseController {
 		return expirationDate;
 	}
 
+	//Control Coupling:
 	/**
 	 * Pay order, and then return the result with a message.
 	 * 
@@ -103,6 +104,7 @@ public class PaymentController extends BaseController {
 		return result;
 	}
 
+	//Common Coupling:sử dụng SessionInformation.cartInstance
 	public void emptyCart(){
         SessionInformation.cartInstance.emptyCart();
     }

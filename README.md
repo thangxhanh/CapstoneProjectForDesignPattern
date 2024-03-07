@@ -47,5 +47,13 @@ Click on `Run` -> `Run Configurations...`  -> `Java Application`, create a new l
 
 ## Lù Mạnh Thắng
 # Week2 Coupling
-- Có common coupling trong các controller các class có sử dụng chung các biến static trong class như "SessionInformation"
-- Có stamp coupling trong class DeliveryInfo.java, Cart.java.
+BaseController:
+Common Coupling: Trong phương thức checkMediaInCart(Media media), có sự phụ thuộc vào cấu trúc nội dung của đối tượng Media.
+Data Coupling: Trong cả hai phương thức checkMediaInCart(Media media) và getListCartMedia(), đều sử dụng SessionInformation.cartInstance.
+AuthenticationController:
+Common Coupling: sử dụng SessionInformation  nhiều vị trí để thay đổi thông tin biến static.
+PaymentController:
+Common Coupling: sử dụng SessionInformation.cartInstance trong emptyCart()
+Control Coupling: trong payOrder() phụ thuộc vào việc kiểm tra lỗi từ các ngoại lệ PaymentException và UnrecognizedException.
+Có common coupling trong các controller các class có sử dụng chung các biến static trong class như "SessionInformation"
+Có stamp coupling trong class DeliveryInfo.java, Cart.java.

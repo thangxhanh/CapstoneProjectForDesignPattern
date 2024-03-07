@@ -11,12 +11,13 @@ import entity.media.Media;
  * @author nguyenlm
  */
 public class BaseController {
-    //Common coupling: sử dụng chung biến như cartInstance
+    //Common Coupling: Trong cả hai phương thức checkMediaInCart(Media media) và getListCartMedia(), đều sử dụng SessionInformation.cartInstance.
     /**
      * The method checks whether the Media in Cart, if it were in, we will return the CartMedia else return null
      * @param media
      * @return CartMedia or null
      */
+    //Stamp Coupling: truyền toàn bộ của đối tượng Media.
     public CartItem checkMediaInCart(Media media){
         return SessionInformation.cartInstance.checkMediaInCart(media);
     }

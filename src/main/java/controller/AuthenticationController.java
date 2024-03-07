@@ -18,6 +18,8 @@ import java.util.Objects;
 /**
  * @author
  */
+
+//Common Coupling: sử dụng SessionInformation  nhiều vị trí để thay đổi thông tin biến static.
 public class AuthenticationController extends BaseController {
 
     public boolean isAnonymousSession() {

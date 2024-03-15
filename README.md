@@ -57,3 +57,9 @@ Common Coupling: sử dụng SessionInformation.cartInstance trong emptyCart()
 Control Coupling: trong payOrder() phụ thuộc vào việc kiểm tra lỗi từ các ngoại lệ PaymentException và UnrecognizedException.
 Có common coupling trong các controller các class có sử dụng chung các biến static trong class như "SessionInformation"
 Có stamp coupling trong class DeliveryInfo.java, Cart.java.
+
+- Cohesion:
+    + Class Cart: Communicational cohesion vì tất cả các method đều dùng dữ liệu từ CartItem.
+    + Class PlaceOrderController: logical cohesion các phương thức validate không có sự liên quan đến nhau.
+    + Class Delivery Info: communicational cohesion vì calculateShippingFee() thực hiện tính phí ship bằng dữ liệu của DeliveryInfo.
+    + Class InterbankPayloadConverter: Coincidental cohesion có method getToday() không liên quan đến chức năng.

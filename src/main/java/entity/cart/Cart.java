@@ -7,6 +7,7 @@ import java.util.List;
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 
+//class Cart: Communicational cohesion vì tất cả các method đều dùng dữ liệu từ CartItem
 public class Cart {
     
     private List<CartItem> lstCartItem;

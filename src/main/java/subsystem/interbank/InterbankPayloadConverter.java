@@ -13,6 +13,7 @@ import java.util.Map;
 /**
  * @author
  */
+//Class InterbankPayloadConverter: Coincidental cohesion có method getToday() không liên quan đến chức năng.
 public class InterbankPayloadConverter {
 
     /**

@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
  * This class controls the flow of place order usecase in our AIMS project
  * @author nguyenlm
  */
+//class PlaceOrderController: logical cohesion các phương thức validate không có sự liên quan đến nhau.
 public class PlaceOrderController extends BaseController {
 
     /**

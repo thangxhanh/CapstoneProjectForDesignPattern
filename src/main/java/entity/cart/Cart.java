@@ -8,11 +8,21 @@ import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 
 //class Cart: Communicational cohesion vì tất cả các method đều dùng dữ liệu từ CartItem
+//Singleton cho cart vì chỉ có 1 cart được tạo ra và sử dụng
+//Nếu không sử dụng Singleton, không thể kiểm soát khi sử dụng đến cart thì ta đang sử dụng cart nào.
 public class Cart {
-    
+    private static Cart Instance;
     private List<CartItem> lstCartItem;
 
-    public Cart() {
+    public static Cart getInstance() {
+        if(Instance == null) {
+            Instance = new Cart();
+        }
+
+        return Instance;
+    }
+
+    private Cart() {
         lstCartItem = new ArrayList<>();
     }
 

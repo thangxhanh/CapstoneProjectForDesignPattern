@@ -63,3 +63,6 @@ Có stamp coupling trong class DeliveryInfo.java, Cart.java.
     + Class PlaceOrderController: logical cohesion các phương thức validate không có sự liên quan đến nhau.
     + Class Delivery Info: communicational cohesion vì calculateShippingFee() thực hiện tính phí ship bằng dữ liệu của DeliveryInfo.
     + Class InterbankPayloadConverter: Coincidental cohesion có method getToday() không liên quan đến chức năng.
+
+# Link video trình bày:
+https://husteduvn.sharepoint.com/sites/DP338/Shared%20Documents/General/Recordings/Cu%E1%BB%99c%20h%E1%BB%8Dp%20k%C3%AAnh%20m%E1%BB%9Bi-20240613_002657-Meeting%20Recording.mp4?web=1&referrer=Teams.TEAMS-ELECTRON&referrerScenario=MeetingChicletGetLink.view.view

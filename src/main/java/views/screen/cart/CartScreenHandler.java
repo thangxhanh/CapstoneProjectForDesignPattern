@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 
 import common.exception.MediaNotAvailableException;
 import common.exception.PlaceOrderException;
+import common.interfaces.Observable;
+import common.interfaces.Observer;
 import controller.PlaceOrderController;
 import controller.ViewCartController;
 import entity.cart.CartItem;
@@ -26,7 +28,7 @@ import views.screen.ViewsConfig;
 import views.screen.popup.PopupScreen;
 import views.screen.shipping.ShippingScreenHandler;
 
-public class CartScreenHandler extends BaseScreenHandler {
+public class CartScreenHandler extends BaseScreenHandler implements Observer {
 	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
 
 	@FXML
@@ -53,8 +55,12 @@ public class CartScreenHandler extends BaseScreenHandler {
 	@FXML
 	private Button btnPlaceOrder;
 
+	private Observable mediaHandler;
+
 	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
+		mediaHandler = new MediaHandler(ViewsConfig.CART_MEDIA_PATH, this);
+		mediaHandler.attach(this);
 		try {
 			setupFunctionality();
 		} catch (IOException ex) {
@@ -175,6 +181,18 @@ public class CartScreenHandler extends BaseScreenHandler {
 			updateCartAmount();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void update(Observable observable) {
+		if (observable instanceof ViewCartController) {
+			try {
+				updateCart();
+			} catch (SQLException e) {
+				LOGGER.severe("Failed update cart: " + e.getMessage());
+				e.printStackTrace();
+			}
 		}
 	}
 }

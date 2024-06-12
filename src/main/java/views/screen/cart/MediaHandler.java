@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
+import common.interfaces.Observable;
+import common.interfaces.Observer;
 import controller.SessionInformation;
 import entity.cart.Cart;
 import entity.cart.CartItem;
@@ -25,7 +28,7 @@ import utils.Utils;
 import views.screen.FXMLScreenHandler;
 import views.screen.ViewsConfig;
 
-public class MediaHandler extends FXMLScreenHandler {
+public class MediaHandler extends FXMLScreenHandler implements Observable {
 
 	private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
 
@@ -59,6 +62,7 @@ public class MediaHandler extends FXMLScreenHandler {
 	private CartItem cartItem;
 	private Spinner<Integer> spinner;
 	private CartScreenHandler cartScreen;
+	private List<Observer> listObserver;
 
 	public MediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
 		super(screenPath);
@@ -128,5 +132,21 @@ public class MediaHandler extends FXMLScreenHandler {
 		});
 		spinnerFX.setAlignment(Pos.CENTER);
 		spinnerFX.getChildren().add(this.spinner);
+	}
+
+	@Override
+	public void attach(Observer observer) {
+		listObserver.add(observer);
+	}
+
+	@Override
+	public void remove(Observer observer) {
+		int index = listObserver.indexOf(observer);
+		if (index >= 0) listObserver.remove(index);
+	}
+
+	@Override
+	public void notifyObservers() {
+		listObserver.forEach(observer -> observer.update(this));
 	}
 }

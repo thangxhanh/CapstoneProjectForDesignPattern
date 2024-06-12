@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.Map;
 
+import Strategy.Payment.PaymentContext;
 import common.exception.InvalidCardException;
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
@@ -94,7 +95,8 @@ public class PaymentController extends BaseController {
 					Integer.parseInt(securityCode));
 
 			this.interbank = new InterbankSubsystem();
-			PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
+			PaymentContext context = new PaymentContext(new InterbankSubsystem());
+			PaymentTransaction transaction = context.payOrder(card, amount, contents);
 
 			result.put("RESULT", "PAYMENT SUCCESSFUL!");
 			result.put("MESSAGE", "You have successfully paid the order!");

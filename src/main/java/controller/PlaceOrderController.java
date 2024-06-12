@@ -9,6 +9,10 @@ import entity.order.OrderItem;
 import entity.shipping.DeliveryInfo;
 import entity.shipping.ShippingConfigs;
 import org.example.DistanceCalculator;
+import utils.distance.DistanceCalculate;
+import utils.distance.NewDistanceCalculate;
+import utils.shippingfee.NewFeeCalculate;
+import utils.shippingfee.FeeCalculate;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,7 +25,6 @@ import java.util.regex.Pattern;
  * This class controls the flow of place order usecase in our AIMS project
  * @author nguyenlm
  */
-//class PlaceOrderController: logical cohesion các phương thức validate không có sự liên quan đến nhau.
 public class PlaceOrderController extends BaseController {
 
     /**
@@ -34,7 +37,7 @@ public class PlaceOrderController extends BaseController {
      * @throws SQLException
      */
     public void placeOrder() throws SQLException {
-        Cart.getInstance().checkAvailabilityOfProduct();
+        SessionInformation.cartInstance.checkAvailabilityOfProduct();
     }
 
     /**
@@ -43,7 +46,8 @@ public class PlaceOrderController extends BaseController {
      * @throws SQLException
      */
     public Order createOrder() throws SQLException {
-        return new Order();
+        //  return new Order(SessionInformation.cartInstance, new FeeCalculate(new DistanceCalculate()));
+        return new Order(SessionInformation.cartInstance, new NewFeeCalculate(new NewDistanceCalculate()));
     }
 
     /**
@@ -70,25 +74,25 @@ public class PlaceOrderController extends BaseController {
                 String.valueOf(info.get("phone")),
                 String.valueOf(info.get("province")),
                 String.valueOf(info.get("address")),
-                String.valueOf(info.get("instructions")),
-                new DistanceCalculator());
+                String.valueOf(info.get("instructions")));
+        //new DistanceCalculator());
         System.out.println(deliveryInfo.getProvince());
         return deliveryInfo;
     }
-    
+
     /**
-   * The method validates the info
-   * @param info
-   * @throws InterruptedException
-   * @throws IOException
-   */
+     * The method validates the info
+     * @param info
+     * @throws InterruptedException
+     * @throws IOException
+     */
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         if (validatePhoneNumber(info.get("phone"))
-        || validateName(info.get("name"))
-        || validateAddress(info.get("address"))) return;
+                || validateName(info.get("name"))
+                || validateAddress(info.get("address"))) return;
         else throw new InvalidDeliveryInfoException();
     }
-    
+
     public boolean validatePhoneNumber(String phoneNumber) {
         if (phoneNumber.length() != 10) return false;
         if (!phoneNumber.startsWith("0")) return false;
@@ -99,7 +103,7 @@ public class PlaceOrderController extends BaseController {
         }
         return true;
     }
-    
+
     public boolean validateName(String name) {
         if (Objects.isNull(name)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
@@ -107,7 +111,7 @@ public class PlaceOrderController extends BaseController {
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }
-    
+
     public boolean validateAddress(String address) {
         if (Objects.isNull(address)) return false;
         String patternString = "^[a-zA-Z\\s]*$";

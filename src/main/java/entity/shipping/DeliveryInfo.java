@@ -3,7 +3,6 @@ package entity.shipping;
 import entity.order.Order;
 import org.example.DistanceCalculator;
 
-//Class Delivery Info: communicational cohesion vì calculateShippingFee() thực hiện tính phí ship bằng dữ liệu của DeliveryInfo.
 public class DeliveryInfo {
 
     protected String name;
@@ -11,23 +10,23 @@ public class DeliveryInfo {
     protected String province;
     protected String address;
     protected String shippingInstructions;
-    protected DistanceCalculator distanceCalculator;
+//    protected DistanceCalculator distanceCalculator;
 
-    public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
-        this.name = name;
+    public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions){
         this.phone = phone;
         this.province = province;
         this.address = address;
         this.shippingInstructions = shippingInstructions;
-        this.distanceCalculator = distanceCalculator;
     }
 
-    //Stamp coupling: truyền biến order mà không sử dụng
-    public int calculateShippingFee(Order order) {
+
+
+    // xoa cach tinh cu
+   /* public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculateDistance(address, province);
         return (int) (distance * 1.2);
     }
-
+*/
     public String getName() {
         return name;
     }

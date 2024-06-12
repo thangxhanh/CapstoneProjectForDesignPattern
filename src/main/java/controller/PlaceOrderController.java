@@ -43,7 +43,7 @@ public class PlaceOrderController extends BaseController {
      * @throws SQLException
      */
     public Order createOrder() throws SQLException {
-        return new Order(Cart.getInstance());
+        return new Order();
     }
 
     /**
